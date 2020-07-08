@@ -12,7 +12,7 @@ public class NBody {
         int N = in.readInt();
         double R = in.readDouble();
         Planet[] allPlanets;
-        allPlanets = new Planet[5];
+        allPlanets = new Planet[N];
         for (int i = 0;i < allPlanets.length; i+=1){
             double xP = in.readDouble();
             double yP = in.readDouble();
@@ -26,20 +26,21 @@ public class NBody {
     }
 
     public static void main(String args[]){
-
         double T = Double.parseDouble(args[0]);
         double dt = Double.parseDouble(args[1]);
         String filename = args[2];
         double R = readRadius(filename);
         Planet[] allPlanets = readPlanets(filename);
+        In in = new In(filename);
+        int N = in.readInt();
 
         StdDraw.enableDoubleBuffering();
         StdDraw.setXscale(-R, R);
         StdDraw.setYscale(-R, R);
         StdAudio.play("audio/2001.mid");
         for (double T0 = 0; T0 < T; T0 += dt){
-            double[] xForces = new double[5];
-            double[] yForces = new double[5];
+            double[] xForces = new double[N];
+            double[] yForces = new double[N];
             for (int i = 0;i < allPlanets.length; i += 1){
                 xForces[i] = allPlanets[i].calcNetForceExertedByX(allPlanets);
                 yForces[i] = allPlanets[i].calcNetForceExertedByY(allPlanets);
