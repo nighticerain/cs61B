@@ -2,44 +2,57 @@ public class ArrayDequeTest {
 
     public static void ArrayTest() {
         System.out.println("ArrayDeque1");
-        ArrayDeque TestDeque1 = new ArrayDeque();
-        TestDeque1.addFirst(1);
-        TestDeque1.addLast('a');
-        TestDeque1.addLast('b');
-        TestDeque1.addLast('c');
-        for(int i = 0; i <= 8; i++) {
-            TestDeque1.addLast(i);
+        ArrayDeque testDeque1 = new ArrayDeque();
+        testDeque1.addFirst(1);
+        testDeque1.addLast('a');
+        testDeque1.addLast('b');
+        testDeque1.addLast('c');
+        for (int i = 0; i <= 8; i++) {
+            testDeque1.addLast(i);
         }
-        TestDeque1.printDeque();
+        testDeque1.printDeque();
         System.out.println("");
 
         System.out.println("ArrayDeque2");
-        ArrayDeque TestDeque2 = new ArrayDeque();
-        TestDeque2.addFirst(1);
-        TestDeque2.addLast('a');
-        TestDeque2.addLast('b');
-        TestDeque2.addLast('c');
-        for(int i = 0; i <= 8; i++) {
-            TestDeque2.addFirst(i);
+        ArrayDeque testDeque2 = new ArrayDeque();
+        testDeque2.addFirst(1);
+        testDeque2.addLast('a');
+        testDeque2.addLast('b');
+        testDeque2.addLast('c');
+        for (int i = 0; i <= 8; i++) {
+            testDeque2.addFirst(i);
         }
-        TestDeque2.printDeque();
+        testDeque2.printDeque();
         System.out.println("");
 
         System.out.println("ArrayDeque3");
-        ArrayDeque TestDeque3 = new ArrayDeque();
-        TestDeque3.addFirst(1);
-        TestDeque3.addLast('a');
-        TestDeque3.addLast('b');
-        for(int i = 0; i <= 8; i++) {
-            TestDeque3.addFirst(i);
+        ArrayDeque testDeuqe3 = new ArrayDeque();
+        testDeuqe3.addFirst(1);
+        testDeuqe3.addLast('a');
+        testDeuqe3.addLast('b');
+        for (int i = 0; i <= 8; i++) {
+            testDeuqe3.addFirst(i);
         }
-        TestDeque3.addLast('c');
-        TestDeque3.printDeque();
+        testDeuqe3.addLast('c');
+        testDeuqe3.printDeque();
         System.out.println("");
 
     }
 
+    public static void getTest() {
+        ArrayDeque testDeque = new ArrayDeque();
+        for (int i = 0; i <= 8; i++) {
+            testDeque.addLast(i);
+        }
+        testDeque.printDeque();
+        System.out.println();
+        System.out.println(testDeque.get(0));
+        System.out.println(testDeque.get(7));
+    }
+
+
     public  static void main(String[] args) {
-        ArrayTest();
+        /* ArrayTest(); */
+        getTest();
     }
 }

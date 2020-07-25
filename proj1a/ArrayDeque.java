@@ -17,14 +17,12 @@ public class ArrayDeque<T> {
 
         if (f_index < l_index && items[0] == null) {
             System.arraycopy(items, 0, a, capacity - size, size);
-        }
-        if (f_index < l_index && items[items.length - 1] == null) {
+        } else if (f_index < l_index && items[items.length - 1] == null) {
             System.arraycopy(items, 0, a, 0, size);
-        }
-        else {
+        } else {
             System.arraycopy(items, 0, a, 0, l_index);
             int New_f_index = size * (r_factor - 1) + f_index - 1;
-            System.arraycopy(items, f_index, a, New_f_index,(capacity - New_f_index));
+            System.arraycopy(items, f_index, a, New_f_index, (capacity - New_f_index));
             f_index = New_f_index;
         }
 
@@ -33,7 +31,7 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (size == items.length - 1) {
-            addResize((int)(size * r_factor));
+            addResize((int) (size * r_factor));
         }
 
         items[f_index] = item;
@@ -48,7 +46,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (size == items.length - 1) {
-            addResize((int)(size * r_factor));
+            addResize((int) (size * r_factor));
         }
 
         items[l_index] = item;
@@ -69,16 +67,16 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int PIndex = f_index + 1;
-        while(true){
-            if (PIndex == l_index) {
+        int p_index = f_index + 1;
+        while (true) {
+            if (p_index == l_index) {
                 break;
             }
-            System.out.print(items[PIndex] + " ");
-            PIndex += 1;
+            System.out.print(items[p_index] + " ");
+            p_index += 1;
 
-            if (PIndex > items.length - 1) {
-                PIndex = 0;
+            if (p_index > items.length - 1) {
+                p_index = 0;
             }
         }
     }
@@ -92,8 +90,7 @@ public class ArrayDeque<T> {
         T a[] = (T[]) new Object[capacity];
         if (f_index > l_index) {
             System.arraycopy(items, f_index, a, 0, size + 1);
-        }
-        else {
+        } else {
             System.arraycopy(items, f_index, a, 0, items.length - f_index - 1);
             System.arraycopy(items, 0, a, items.length - f_index - 1, l_index);
         }
@@ -110,7 +107,10 @@ public class ArrayDeque<T> {
         f_index += 1;
         size -= 1;
 
-        if ( items.length > 16 && size < (int)(items.length * 0.25)) {
+        if (f_index > items.length - 1)
+            f_index = 0;
+
+        if (items.length > 16 && size < (int) (items.length * 0.25)) {
             removeResize(size * r_factor);
         }
         return item;
@@ -122,23 +122,24 @@ public class ArrayDeque<T> {
         }
 
         T item = items[l_index - 1];
-        f_index += 1;
+        l_index -= 1;
         size -= 1;
+
+        if (l_index < 0)
+            l_index = items.length;
+
         return item;
     }
 
-    public  T get(int index) {
-        int PIndex = f_index + 1 + index;
-        if (PIndex >= items.length) {
-            PIndex = PIndex - items.length - 1;
-        }
-
-        if (PIndex > l_index - 1) {
-            return null;
-        }
-        else {
-            return items[PIndex];
-        }
+    public T get(int index) {
+        int p_index = f_index + 1 + index;
+        if (p_index > items.length - 1) {
+            p_index = p_index - items.length;
+            if (p_index > l_index - 1)
+                return null;
+            else return items[p_index];
+        } else return items[p_index];
     }
-
 }
+
+
