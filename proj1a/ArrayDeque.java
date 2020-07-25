@@ -1,29 +1,29 @@
 public class ArrayDeque<T> {
     private T[] items;
     private int size;
-    private int r_factor = 2;
-    private int f_index;
-    private int l_index;
+    private int rFactor = 2;
+    private int fIndex;
+    private int lIndex;
 
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        f_index = items.length / 2;
-        l_index = f_index + 1;
+        fIndex = items.length / 2;
+        lIndex = fIndex + 1;
     }
 
     private void addResize(int capacity) {
-        T a[] = (T[]) new Object[capacity];
+        T[] a = (T[]) new Object[capacity];
 
-        if (f_index < l_index && items[0] == null) {
+        if (fIndex < lIndex && items[0] == null) {
             System.arraycopy(items, 0, a, capacity - size, size);
-        } else if (f_index < l_index && items[items.length - 1] == null) {
+        } else if (fIndex < lIndex && items[items.length - 1] == null) {
             System.arraycopy(items, 0, a, 0, size);
         } else {
-            System.arraycopy(items, 0, a, 0, l_index);
-            int New_f_index = size * (r_factor - 1) + f_index - 1;
-            System.arraycopy(items, f_index, a, New_f_index, (capacity - New_f_index));
-            f_index = New_f_index;
+            System.arraycopy(items, 0, a, 0, lIndex);
+            int newIndex = size * (rFactor - 1) + fIndex - 1;
+            System.arraycopy(items, fIndex, a, newIndex, (capacity - newIndex));
+            fIndex = newIndex;
         }
 
         items = a;
@@ -31,14 +31,14 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (size == items.length - 1) {
-            addResize((int) (size * r_factor));
+            addResize((int) (size * rFactor));
         }
 
-        items[f_index] = item;
-        f_index -= 1;
+        items[fIndex] = item;
+        fIndex -= 1;
 
-        if (f_index < 0) {
-            f_index = items.length - 1;
+        if (fIndex < 0) {
+            fIndex = items.length - 1;
         }
 
         size += 1;
@@ -46,14 +46,14 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (size == items.length - 1) {
-            addResize((int) (size * r_factor));
+            addResize((int) (size * rFactor));
         }
 
-        items[l_index] = item;
-        l_index += 1;
+        items[lIndex] = item;
+        lIndex += 1;
 
-        if (l_index > items.length - 1) {
-            l_index = 0;
+        if (lIndex > items.length - 1) {
+            lIndex = 0;
         }
 
         size += 1;
@@ -67,16 +67,16 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int p_index = f_index + 1;
+        int pIndex = fIndex + 1;
         while (true) {
-            if (p_index == l_index) {
+            if (pIndex == lIndex) {
                 break;
             }
-            System.out.print(items[p_index] + " ");
-            p_index += 1;
+            System.out.print(items[pIndex] + " ");
+            pIndex += 1;
 
-            if (p_index > items.length - 1) {
-                p_index = 0;
+            if (pIndex > items.length - 1) {
+                pIndex = 0;
             }
         }
     }
@@ -87,12 +87,12 @@ public class ArrayDeque<T> {
 
 
     private void removeResize(int capacity) {
-        T a[] = (T[]) new Object[capacity];
-        if (f_index > l_index) {
-            System.arraycopy(items, f_index, a, 0, size + 1);
+        T[] a = (T[]) new Object[capacity];
+        if (fIndex > lIndex) {
+            System.arraycopy(items, fIndex, a, 0, size + 1);
         } else {
-            System.arraycopy(items, f_index, a, 0, items.length - f_index - 1);
-            System.arraycopy(items, 0, a, items.length - f_index - 1, l_index);
+            System.arraycopy(items, fIndex, a, 0, items.length - fIndex - 1);
+            System.arraycopy(items, 0, a, items.length - fIndex - 1, lIndex);
         }
         items = a;
     }
@@ -103,15 +103,16 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        T item = items[f_index + 1];
-        f_index += 1;
+        T item = items[fIndex + 1];
+        fIndex += 1;
         size -= 1;
 
-        if (f_index > items.length - 1)
-            f_index = 0;
+        if (fIndex > items.length - 2) {
+            fIndex = 0;
+        }
 
         if (items.length > 16 && size < (int) (items.length * 0.25)) {
-            removeResize(size * r_factor);
+            removeResize(size * rFactor);
         }
         return item;
     }
@@ -121,24 +122,29 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        T item = items[l_index - 1];
-        l_index -= 1;
+        T item = items[lIndex - 1];
+        lIndex -= 1;
         size -= 1;
 
-        if (l_index < 0)
-            l_index = items.length;
+        if (lIndex < 1) {
+            lIndex = items.length;
+        }
 
         return item;
     }
 
     public T get(int index) {
-        int p_index = f_index + 1 + index;
-        if (p_index > items.length - 1) {
-            p_index = p_index - items.length;
-            if (p_index > l_index - 1)
+        int pIndex = fIndex + 1 + index;
+        if (pIndex > items.length - 1) {
+            pIndex = pIndex - items.length;
+            if (pIndex > lIndex - 1) {
                 return null;
-            else return items[p_index];
-        } else return items[p_index];
+            } else {
+                return items[pIndex];
+            }
+        } else {
+            return items[pIndex];
+        }
     }
 }
 

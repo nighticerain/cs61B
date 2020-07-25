@@ -1,6 +1,5 @@
 public class ArrayDequeTest {
-
-    public static void ArrayTest() {
+    public static void arrayTest() {
         System.out.println("ArrayDeque1");
         ArrayDeque testDeque1 = new ArrayDeque();
         testDeque1.addFirst(1);
@@ -26,15 +25,15 @@ public class ArrayDequeTest {
         System.out.println("");
 
         System.out.println("ArrayDeque3");
-        ArrayDeque testDeuqe3 = new ArrayDeque();
-        testDeuqe3.addFirst(1);
-        testDeuqe3.addLast('a');
-        testDeuqe3.addLast('b');
+        ArrayDeque testDeque3 = new ArrayDeque();
+        testDeque3.addFirst(1);
+        testDeque3.addLast('a');
+        testDeque3.addLast('b');
         for (int i = 0; i <= 8; i++) {
-            testDeuqe3.addFirst(i);
+            testDeque3.addFirst(i);
         }
-        testDeuqe3.addLast('c');
-        testDeuqe3.printDeque();
+        testDeque3.addLast('c');
+        testDeque3.printDeque();
         System.out.println("");
 
     }
@@ -52,7 +51,7 @@ public class ArrayDequeTest {
 
 
     public  static void main(String[] args) {
-        /* ArrayTest(); */
+        arrayTest();
         getTest();
     }
 }
