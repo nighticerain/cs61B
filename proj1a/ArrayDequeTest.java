@@ -64,14 +64,21 @@ public class ArrayDequeTest {
 
     public static void removeResize() {
         ArrayDeque testDeque = new ArrayDeque();
-        for (int i = 0; i <= 10; i++) {
-            testDeque.addLast(i);
+
+        for (int i = 0; i <= 200; i++) {
+            testDeque.addFirst(i);
         }
-        for (int i = 0; i <= 10; i++) {
-            testDeque.addFirst(-i);
-        }
-        for (int i = 0; i <= 16; i++) {
+        testDeque.printDeque();
+
+        int count = testDeque.size();
+        for (int i = 0; i < count; i++) {
             testDeque.removeFirst();
+        }
+        testDeque.printDeque();
+        System.out.println();
+
+        for (int i = 0; i <= 200; i++) {
+            testDeque.addFirst(i);
         }
         testDeque.printDeque();
     }
