@@ -22,11 +22,11 @@ public class LinkedListDeque<T> {
     }
 
     public void addFirst(T item) {
-        TNode NewTNode = new TNode(null, null, item);
-        NewTNode.next = sentinel.next;
-        NewTNode.prev = sentinel;
-        sentinel.next.prev = NewTNode;
-        sentinel.next = NewTNode;
+        TNode newTNode = new TNode(null, null, item);
+        newTNode.next = sentinel.next;
+        newTNode.prev = sentinel;
+        sentinel.next.prev = newTNode;
+        sentinel.next = newTNode;
         size += 1;
     }
 

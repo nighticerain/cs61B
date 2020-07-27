@@ -103,13 +103,14 @@ public class ArrayDeque<T> {
             return null;
         }
 
+        if (fIndex > items.length - 2) {
+            fIndex = -1;
+        }
+
         T item = items[fIndex + 1];
+        items[fIndex + 1] = null;
         fIndex += 1;
         size -= 1;
-
-        if (fIndex > items.length - 2) {
-            fIndex = 0;
-        }
 
         if (items.length > 16 && size < (int) (items.length * 0.25)) {
             removeResize(size * rFactor);
@@ -123,6 +124,7 @@ public class ArrayDeque<T> {
         }
 
         T item = items[lIndex - 1];
+        items[lIndex - 1] = null;
         lIndex -= 1;
         size -= 1;
 

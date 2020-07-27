@@ -49,9 +49,22 @@ public class ArrayDequeTest {
         System.out.println(testDeque.get(7));
     }
 
+    public  static void removeTest() {
+        ArrayDeque testDeque = new ArrayDeque();
+        for (int i = 0; i <= 8; i++) {
+            testDeque.addLast(i);
+        }
+        testDeque.printDeque();
+        System.out.println();
+
+        for (int i = 0; i <= 8; i++) {
+            System.out.println(testDeque.removeLast());
+        }
+    }
 
     public  static void main(String[] args) {
-        arrayTest();
-        getTest();
+        /* arrayTest(); */
+        /* getTest(); */
+        removeTest();
     }
 }
