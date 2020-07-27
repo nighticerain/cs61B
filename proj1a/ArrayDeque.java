@@ -123,14 +123,14 @@ public class ArrayDeque<T> {
             return null;
         }
 
+        if (lIndex < 1) {
+            lIndex = items.length;
+        }
+
         T item = items[lIndex - 1];
         items[lIndex - 1] = null;
         lIndex -= 1;
         size -= 1;
-
-        if (lIndex < 1) {
-            lIndex = items.length;
-        }
 
         return item;
     }
