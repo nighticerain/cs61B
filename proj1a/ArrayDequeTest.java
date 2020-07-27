@@ -62,9 +62,24 @@ public class ArrayDequeTest {
         }
     }
 
+    public static void removeResize() {
+        ArrayDeque testDeque = new ArrayDeque();
+        for (int i = 0; i <= 10; i++) {
+            testDeque.addLast(i);
+        }
+        for (int i = 0; i <= 10; i++) {
+            testDeque.addFirst(-i);
+        }
+        for (int i = 0; i <= 16; i++) {
+            testDeque.removeFirst();
+        }
+        testDeque.printDeque();
+    }
+
     public  static void main(String[] args) {
         /* arrayTest(); */
         /* getTest(); */
-        removeTest();
+        /* removeTest(); */
+        removeResize();
     }
 }

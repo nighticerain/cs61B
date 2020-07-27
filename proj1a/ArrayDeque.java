@@ -89,15 +89,15 @@ public class ArrayDeque<T> {
     private void removeResize(int capacity) {
         T[] a = (T[]) new Object[capacity];
 
-        if (fIndex > lIndex) {
-            System.arraycopy(items, fIndex , a, 0, size + 1);
+        if (fIndex < lIndex) {
+            System.arraycopy(items, fIndex, a, 0, size + 1);
         } else {
             System.arraycopy(items, fIndex, a, 0, items.length - fIndex - 1);
             System.arraycopy(items, 0, a, items.length - fIndex - 1, lIndex);
         }
 
         fIndex = 0;
-        lIndex = size + 2;
+        lIndex = size + 1;
         items = a;
     }
 
